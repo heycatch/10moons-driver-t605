@@ -11,11 +11,16 @@ actions:
     pen: BTN_TOOL_PEN
     sylus: BTN_STYLUS
     pen_touch: BTN_TOUCH
+    pen_buttons:
+        - KEY_LEFTBRACE
+        - KEY_RIGHTBRACE
     tablet_buttons:
+        - KEY_LEFTCTRL+KEY_KPMINUS
+        - KEY_LEFTCTRL+KEY_KPPLUS
+        - KEY_B
+        - KEY_F
         - KEY_LEFTCTRL+KEY_Z
-        - KEY_LEFTCTRL+KEY_A
-        - KEY_C
-        - KEY_D
+        - KEY_SPACE
 settings:
     swap_axis: false
     swap_direction_x: true

@@ -1,11 +1,12 @@
-# 10moons-driver
+# 10moons-driver (FULL NAME: SZ PING-IT INC.  [T605] Driver Inside Tablet)
 
-Simple driver for 10moons T503 tablet for linux
+Simple driver for 10moons T605 tablet for linux
 
 ## About
 
-Driver which provides basic functionality for 10moons T503 tablet:
-* 4 buttons on the tablet itself
+Driver which provides basic functionality for 10moons T605 tablet:
+* 6 buttons on the tablet itself (1: zoomout; 2: zoomin; 3: brush; 4: fill; 5: ctrl+z; 6: panning)
+* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) (IN PROGRESS)
 * Correct X and Y positioning
 * Pressure sensitivity
 
@@ -16,7 +17,7 @@ Tablet has 4096 levels in both axes and 2047 levels of pressure.
 Clone or download this repository.
 
 ```
-git clone https://github.com/alex-s-v/10moons-driver.git
+git clone https://github.com/heycatch/10moons-driver.git
 ```
 
 Then install all dependencies listed in _requirements.txt_ file either using python virtual environments or not.
@@ -47,11 +48,3 @@ To list all the possible key codes you may run:
 ```
 python -c "from evdev import ecodes; print([x for x in dir(ecodes) if 'KEY' in x])"
 ```
-
-## Credits
-
-Some parts of code are taken from: https://github.com/Mantaseus/Huion_Kamvas_Linux
-
-## Known issues
-
-Buttons on the pen itself do not work and hence not specified. I don't know if it's the issue only on my device or it's a common problem.

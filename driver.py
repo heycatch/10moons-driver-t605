@@ -1,9 +1,6 @@
-# Proper test driver for the 10moons graphics tablet
-
 import os
 import sys
 
-# Specification of the device https://python-evdev.readthedocs.io/en/latest/
 from evdev import UInput, ecodes, AbsInfo
 # Establish usb communication with device
 import usb
@@ -11,8 +8,7 @@ import yaml
 
 path = os.path.join(os.path.dirname(__file__), "config.yaml")
 # Loading tablet configuration
-with open(path, "r") as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
+with open(path, "r") as f: config = yaml.load(f, Loader=yaml.FullLoader)
 
 
 # Get the required ecodes from configuration
@@ -20,21 +16,17 @@ pen_codes = []
 btn_codes = []
 for k, v in config["actions"].items():
     codes = btn_codes if k == "tablet_buttons" else pen_codes
-    if isinstance(v, list):
-        codes.extend(v)
-    else:
-        codes.append(v)
+    if isinstance(v, list): codes.extend(v)
+    else: codes.append(v)
 
 
-temp = []
-for c in pen_codes:
-    temp.extend([ecodes.ecodes[x] for x in c.split("+")])
-pen_codes = temp
+tempP = []
+for p in pen_codes: tempP.extend([ecodes.ecodes[x] for x in p.split("+")])
+pen_codes = tempP
 
-temp = []
-for c in btn_codes:
-    temp.extend([ecodes.ecodes[x] for x in c.split("+")])
-btn_codes = temp
+tempB = []
+for b in btn_codes: tempB.extend([ecodes.ecodes[x] for x in b.split("+")])
+btn_codes = tempB
 
 pen_events = {
     ecodes.EV_KEY: pen_codes,
@@ -57,9 +49,8 @@ ep = dev[0].interfaces()[2].endpoints()[0]
 dev.reset()
 
 # Drop default kernel driver from all devices
-for j in [0, 1, 2]:
-    if dev.is_kernel_driver_active(j):
-        dev.detach_kernel_driver(j)
+for i in [0, 1, 2]:
+    if dev.is_kernel_driver_active(i): dev.detach_kernel_driver(i)
 
 # Set new configuration
 dev.set_configuration()
@@ -85,23 +76,17 @@ while True:
             vpen.write(ecodes.EV_ABS, ecodes.ABS_X, pen_x)
             vpen.write(ecodes.EV_ABS, ecodes.ABS_Y, pen_y)
             vpen.write(ecodes.EV_ABS, ecodes.ABS_PRESSURE, pen_pressure)
-            if data[1] == 192: # Pen touch
-                vpen.write(ecodes.EV_KEY, ecodes.BTN_TOUCH, 0)
-            else:
-                vpen.write(ecodes.EV_KEY, ecodes.BTN_TOUCH, 1)
+            if data[1] == 192: vpen.write(ecodes.EV_KEY, ecodes.BTN_TOUCH, 0)
+            else: vpen.write(ecodes.EV_KEY, ecodes.BTN_TOUCH, 1)
         elif data[0] == 2: # Tablet button actions
-            # press types: 0 - up; 1 - down; 2 - hold
             press_type = 1
-            if data[1] == 2: # First button
-                pressed = 0
-            elif data[1] == 4: # Second button
-                pressed = 1
-            elif data[3] == 44: # Third button
-                pressed = 2
-            elif data[3] == 43: # Fourth button
-                pressed = 3
-            else:
-                press_type = 0
+            if data[3] == 86: pressed = 0
+            elif data[3] == 87: pressed = 1
+            elif data[3] == 47: pressed = 2
+            elif data[3] == 48: pressed = 3
+            elif data[3] == 43: pressed = 4
+            elif data[3] == 44: pressed = 5
+            else: press_type = 0
             key_codes = config["actions"]["tablet_buttons"][pressed].split("+")
             for key in key_codes:
                 act = ecodes.ecodes[key]
@@ -114,8 +99,6 @@ while True:
             vpen.close()
             raise Exception("Device has been disconnected")
     except KeyboardInterrupt:
-    	vpen.close()
-    	vbtn.close()
-    	sys.exit("\nDriver terminated successfully.")
-    except Excception as e:
-    	print(e)
+        vpen.close()
+        vbtn.close()
+        sys.exit("\nDriver terminated successfully")
