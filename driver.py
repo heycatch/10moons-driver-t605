@@ -6,10 +6,10 @@ from evdev import UInput, ecodes, AbsInfo
 import usb
 import yaml
 
+
 path = os.path.join(os.path.dirname(__file__), "config.yaml")
 # Loading tablet configuration
 with open(path, "r") as f: config = yaml.load(f, Loader=yaml.FullLoader)
-
 
 # Get the required ecodes from configuration
 pen_codes = []
@@ -18,7 +18,6 @@ for k, v in config["actions"].items():
     codes = btn_codes if k == "tablet_buttons" else pen_codes
     if isinstance(v, list): codes.extend(v)
     else: codes.append(v)
-
 
 tempP = []
 for p in pen_codes: tempP.extend([ecodes.ecodes[x] for x in p.split("+")])
