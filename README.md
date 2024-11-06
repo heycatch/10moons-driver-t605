@@ -1,4 +1,7 @@
-# 10moons-driver (FULL NAME: SZ PING-IT INC.  [T605] Driver Inside Tablet)
+# 10moons-driver
+
+## SZ PING-IT INC. [T605] Driver Inside Tablet
+![](https://raw.githubusercontent.com/heycatch/10moons-driver/refs/heads/master/T605.png)
 
 Simple driver for 10moons T605 tablet for linux
 
@@ -6,7 +9,7 @@ Simple driver for 10moons T605 tablet for linux
 
 Driver which provides basic functionality for 10moons T605 tablet:
 * 6 buttons on the tablet itself (1: zoomout; 2: zoomin; 3: brush; 4: fill; 5: ctrl+z; 6: panning)
-* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) (IN PROGRESS)
+* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) (**IN PROGRESS**)
 * Correct X and Y positioning
 * Pressure sensitivity
 
