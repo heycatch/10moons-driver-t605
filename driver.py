@@ -30,7 +30,6 @@ btn_codes = tempB
 pen_events = {
     ecodes.EV_KEY: pen_codes,
     ecodes.EV_ABS: [
-        #AbsInfo input: value, min, max, fuzz, flat
         (ecodes.ABS_X, AbsInfo(0, 0, config["pen"]["max_x"], 0, 0, config["pen"]["resolution_x"])),         
         (ecodes.ABS_Y, AbsInfo(0, 0, config["pen"]["max_y"], 0, 0, config["pen"]["resolution_y"])),
         (ecodes.ABS_PRESSURE, AbsInfo(0, 0, config["pen"]["max_pressure"], 0, 0, 0))
@@ -41,8 +40,9 @@ btn_events = {ecodes.EV_KEY: btn_codes}
 
 # Find the device
 dev = usb.core.find(idVendor=config["vendor_id"], idProduct=config["product_id"])
+# Interface [0] refers to mass storage
+# Interface [1] does not reac in any way
 # Select end point for reading second interface [2] for actual data
-# I don't know what [0] and [1] are used for
 ep = dev[0].interfaces()[2].endpoints()[0]
 # Reset the device (don't know why, but till it works don't touch it)
 dev.reset()

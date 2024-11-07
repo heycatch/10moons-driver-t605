@@ -20,7 +20,7 @@ Tablet has 4096 levels in both axes and 2047 levels of pressure.
 Clone or download this repository.
 
 ```
-git clone https://github.com/heycatch/10moons-driver.git
+git clone https://github.com/heycatch/10moons-driver-t605.git
 ```
 
 Then install all dependencies listed in _requirements.txt_ file either using python virtual environments or not.
