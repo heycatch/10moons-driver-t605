@@ -9,7 +9,7 @@ Simple driver for 10moons T605 tablet for linux
 
 Driver which provides basic functionality for 10moons T605 tablet:
 * 6 buttons on the tablet itself (1: zoomout; 2: zoomin; 3: brush; 4: fill; 5: ctrl+z; 6: panning)
-* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) [READ FIXME](https://github.com/heycatch/10moons-driver-t605/blob/a172d4ff846b3e6fc6e01b60117ee3ed715f185f/driver.py#L53)
+* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) [READ FIXME](https://github.com/heycatch/10moons-driver-t605/blob/d70e474fbdcef673c9ed62f68df44e5ca5ed1e15/driver.py#L53)
 * Correct X and Y positioning
 * Pressure sensitivity
 
