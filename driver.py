@@ -100,9 +100,6 @@ class Driver(QMainWindow):
 
     if self.injection_active:
       try:
-        self.pen_codes = []
-        self.btn_codes = []
-
         def convert_codes(target: List[str]) -> List[int]:
           temp = []
           for t in target: temp.extend([ecodes.ecodes[x] for x in t.split("+")])
@@ -130,6 +127,9 @@ class Driver(QMainWindow):
         def coordinate_axis(axis: str) -> int:
           return self.settings["pen"]["max_" + axis] * self.settings["settings"]["swap_direction_" + axis]
 
+        # Get the required ecodes from configuration.
+        self.pen_codes = []
+        self.btn_codes = []
         for k, v in self.settings["actions"].items():
           codes = self.btn_codes if k == "tablet_buttons" else self.pen_codes
           if isinstance(v, list): codes.extend(v)
@@ -220,7 +220,7 @@ class Driver(QMainWindow):
           for key in key_codes:
             act = ecodes.ecodes[key]
             self.vbtn.write(ecodes.EV_KEY, act, press_type)
-        # Flush
+        # Flush.
         self.vpen.syn()
         self.vbtn.syn()
       except usb.core.USBError as e:
