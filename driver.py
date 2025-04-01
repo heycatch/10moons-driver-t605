@@ -52,7 +52,7 @@ class Driver(QMainWindow):
         ],
         "tablet_buttons": [
           "KEY_LEFTCTRL+KEY_KPMINUS",
-          "KEY_LEFTCTRL+KEY_KPPLUS",
+          "KEY_KPPLUS",
           "KEY_B",
           "KEY_F",
           "KEY_LEFTCTRL+KEY_Z",
@@ -139,8 +139,9 @@ class Driver(QMainWindow):
         self.btn_codes = convert_codes(self.btn_codes)
 
         # Find the device.
+        # NOTE: Idk why, but it needs to be converted to int, although it didn't need to do so before.
         self.dev = usb.core.find(
-          idVendor=self.settings["vendor_id"], idProduct=self.settings["product_id"]
+          idVendor=int(self.settings["vendor_id"], 16), idProduct=int(self.settings["product_id"], 16)
         )
         if self.dev is None: raise Exception("Device not found")
         # Interface [0] refers to mass storage.
@@ -170,13 +171,14 @@ class Driver(QMainWindow):
 
         self.pressed = -1
 
+        # TODO: migrate from classic Thread to qt QThread?
         self.injection_thread = Thread(target=self.read_device_data)
         self.injection_thread.daemon = True
         self.injection_thread.start()
 
         self.injection_status_label.setText("Injection started")
         self.injection_status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.injection_status_label.setStyleSheet("font-size: 25px;")
+        self.injection_status_label.setStyleSheet("font-size: 25px; color: green;")
         self.toggle_injection_btn.setText("Stop injection")
       except Exception as e:
         self.injection_active = False
@@ -226,12 +228,22 @@ class Driver(QMainWindow):
       except usb.core.USBError as e:
         if e.args[0] == 19:
           self.vpen.close()
+          self.vbtn.close()
           self.injection_active = False
           self.injection_status_label.setText("Device disconnected")
           self.injection_status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-          self.injection_status_label.setStyleSheet("font-size: 25px;")
+          self.injection_status_label.setStyleSheet("font-size: 25px; color: red;")
           self.toggle_injection_btn.setText("Start injection")
           break
+      except UnboundLocalError:
+        self.vpen.close()
+        self.vbtn.close()
+        self.injection_active = False
+        self.injection_status_label.setText("Device disconnected")
+        self.injection_status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.injection_status_label.setStyleSheet("font-size: 25px; color: red;")
+        self.toggle_injection_btn.setText("Start injection")
+        break
 
   def create_settings_tab(self) -> QWidget:
     tab = QWidget()

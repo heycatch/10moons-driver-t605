@@ -1,12 +1,14 @@
 <div align="center">
-  <picture><img alt="logo" width="60%" height="60%" src="https://raw.githubusercontent.com/heycatch/10moons-driver/refs/heads/qt/docs/T605.png"></picture>
+  <picture><img alt="logo" width="60%" height="60%" src="https://raw.githubusercontent.com/heycatch/10moons-driver/refs/heads/master/docs/T605.png"></picture>
   <h2>SZ PING-IT INC. [T605] Driver Inside Tablet</h2>
 </div>
 
 ## About
+SETTINGS ARE MADE PRIMARILY FOR **KRITA**. FOR OTHER EDITORS BUTTONS WILL NEED TO BE REDEFINED AGAIN.
+
 Driver which provides basic functionality for 10moons T605 tablet:
 * 6 buttons on the tablet itself (1: zoomout; 2: zoomin; 3: brush; 4: fill; 5: ctrl+z; 6: panning).
-* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) **THE BUTTONS ON THE STYLUS DON'T WORK. LOOK FOR MORE INFORMATION ON FIXME IN THE CODE**.
+* 2 buttons on the stylus (1(+): increase brush size; 2(-): reduce brush size) **STYLUS BUTTONS ARE UNSTABLE, BEST NOT TO USE**.
 * Correct X and Y positioning.
 * Pressure sensitivity.
 
@@ -15,20 +17,17 @@ Tablet has 4096 levels in both axes and 2047 levels of pressure.
 ## How to use
 Clone or download this repository.
 
-```
-git clone https://github.com/heycatch/10moons-driver-t605.git
-```
-
 Then install all dependencies listed in _requirements.txt_ file either using python virtual environments or not.
-
-```
-python -m pip install -r requirements.txt
-```
 
 Connect tablet to your computer and then run _driver.py_ file with **sudo** privileges.
 
-```
-sudo python driver.py
+Press the "Start injection".
+```bash
+git clone https://github.com/heycatch/10moons-driver-t605.git
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+sudo ./venv/bin/python3 driver.py
 ```
 
 **You need to connect your tablet and run the driver prior to launching a drawing software otherwise the device will not be recognized by it.**
