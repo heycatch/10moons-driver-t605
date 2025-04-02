@@ -184,6 +184,8 @@ class Driver(QMainWindow):
         self.injection_active = False
         QMessageBox.critical(self, "Error", f"Failed to start injection: {str(e)}")
         self.injection_status_label.setText("Injection failed")
+        self.injection_status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.injection_status_label.setStyleSheet("font-size: 25px; color: red;")
         self.toggle_injection_btn.setText("Start injection")
     else:
       if hasattr(self, "vpen"): self.vpen.close()
