@@ -4,7 +4,10 @@
 </div>
 
 ## About
-SETTINGS ARE MADE PRIMARILY FOR **KRITA**. FOR OTHER EDITORS BUTTONS WILL NEED TO BE REDEFINED AGAIN.
+SETTINGS ARE MADE PRIMARILY FOR **KRITA**.
+
+FOR OTHER EDITORS YOU WILL NEED TO CHANGE THE KEYS SLIGHTLY.
+YOU CAN SEE THE LIST of AVAILABLE KEYS [HER](https://raw.githubusercontent.com/heycatch/10moons-driver/refs/heads/master/docs/input-event-codes.h).
 
 Driver which provides basic functionality for 10moons T605 tablet:
 * 6 buttons on the tablet itself (1: zoomout; 2: zoomin; 3: brush; 4: fill; 5: ctrl+z; 6: panning).
